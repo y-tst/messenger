@@ -17,8 +17,7 @@ public class Messenger {
      * @param mailServer     the mail server
      * @param templateEngine the template engine
      */
-    public Messenger(MailServer mailServer,
-                     TemplateEngine templateEngine) {
+    public Messenger(MailServer mailServer, TemplateEngine templateEngine) {
         this.mailServer = mailServer;
         this.templateEngine = templateEngine;
     }
@@ -30,8 +29,7 @@ public class Messenger {
      * @param template the template
      */
     public void sendMessage(Client client, Template template) {
-        String messageContent =
-            templateEngine.generateMessage(template, client);
-        mailServer.send(client.getAddresses(), messageContent);
+        String messageContent =  templateEngine.generateMessage(template, client);
+        mailServer.send(client.getEmail(), messageContent);
     }
 }

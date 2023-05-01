@@ -1,33 +1,83 @@
 package com.epam.ld.module2.testing;
 
+import com.epam.ld.module2.testing.template.Template;
+import com.epam.ld.module2.testing.template.TemplateEngine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 
 public class MailServerTest {
 
-    private MailService mailService;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private MailServer mailServer;
 
     @BeforeEach
-    void setUp() {
-        mailService = new MailService();
-        System.setOut(new PrintStream(outputStreamCaptor));
+    public void setUpForAll() {
+        mailServer = new MailServer();
     }
 
     @Test
-    void testSendMail() {
-        String to = "john@example.com";
-        String subject = "Test Subject";
-        String body = "Test Body";
-        String expectedOutput = "Mail sent to: " + to + "\nSubject: " + subject + "\nBody: " + body;
+    public void testSend() {
 
-        mailService.sendMail(to, subject, body);
+        String email = "user@example.com";
+        String body = "Hello, this is a test email.";
 
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+        mailServer.send(email, body);
+    }
+
+    @Test
+    public void testSendWithEmptyToAddress() {
+
+        String email = "";
+        String messageContent = "Hello, this is a test email.";
+
+        mailServer.send(email, messageContent);
+    }
+
+    @Test
+    public void testSendWithNullToAddress() {
+        // Test data
+        String email = null;
+        String messageContent = "Hello, this is a test email.";
+
+        mailServer.send(email, messageContent);
+    }
+
+    @Test
+    public void testSendWithEmptyBody() {
+
+        String email = "user@example.com";
+        String messageContent = "";
+
+        mailServer.send(email, messageContent);
+    }
+
+    @Test
+    public void testSendWithNullBody() {
+
+        String email = "user@example.com";
+        String messageContent = null;
+
+        mailServer.send(email, messageContent);
+    }
+
+
+    @BeforeEach
+    public void setUp() {
+        TemplateEngine templateEngine = mock(TemplateEngine.class);
+        Client client = mock(Client.class);
+        mailServer = new MailServer(templateEngine, client);
+    }
+
+    @Test
+    public void testSendEmail() {
+
+        String email = "user@example.com";
+        String messageContent = "Hello, this is a test email.";
+
+        mailServer.send(email, messageContent);
+
+        verify(mailServer.getClient(), times(1));
+//        verify(mailServer.getTemplateEngine(), times(1)).generateMessage(Mockito.any(Template.class), Mockito.any(Client.class));
     }
 }

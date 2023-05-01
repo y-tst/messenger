@@ -14,7 +14,7 @@ public class Template {
         return templateText;
     }
 
-    public String replacePlaceholders(Map<String, String> values) throws RuntimeException {
+    public String replacePlaceholders(Map<String, String> values) {
         String result = templateText;
 
         for (Map.Entry<String, String> entry : values.entrySet()) {
