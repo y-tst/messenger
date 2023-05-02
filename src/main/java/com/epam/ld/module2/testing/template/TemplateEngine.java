@@ -18,10 +18,10 @@ public class TemplateEngine {
         values.put("name", client.getName());
         values.put("email", client.getEmail());
 
-        return prepareMessage(template.getTemplateText(), values);
+        return replacePlaceholders(template.getTemplateText(), values);
     }
 
-    public String prepareMessage(String templateText, Map<String, String> values) {
+    public String replacePlaceholders(String templateText, Map<String, String> values) {
         Template template = new Template(templateText);
         if (templateText.chars().filter(ch -> ch == '#').count() <= values.size()) {
             String message = template.replacePlaceholders(values);

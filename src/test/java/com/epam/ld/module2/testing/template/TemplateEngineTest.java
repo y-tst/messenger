@@ -24,7 +24,7 @@ public class TemplateEngineTest {
         values.put("email", "john@example.com");
         String expectedMessage = "Hello, John! Your email is john@example.com.";
 
-        String message = templateEngine.prepareMessage(templateText, values);
+        String message = templateEngine.replacePlaceholders(templateText, values);
 
         assertEquals(expectedMessage, message);
     }
@@ -37,7 +37,7 @@ public class TemplateEngineTest {
         // Missing "email" value
 
         assertThrows(RuntimeException.class, () -> {
-            templateEngine.prepareMessage(templateText, values);
+            templateEngine.replacePlaceholders(templateText, values);
         });
     }
 
@@ -49,7 +49,7 @@ public class TemplateEngineTest {
         values.put("email", "john@example.com"); // Extra value
 
         String expectedMessage = "Hello, John!";
-        String message = templateEngine.prepareMessage(templateText, values);
+        String message = templateEngine.replacePlaceholders(templateText, values);
 
         assertEquals(expectedMessage, message);
     }
@@ -61,7 +61,7 @@ public class TemplateEngineTest {
         values.put("name", "Jöhn"); // Special character
 
         String expectedMessage = "Hello, Jöhn!";
-        String message = templateEngine.prepareMessage(templateText, values);
+        String message = templateEngine.replacePlaceholders(templateText, values);
 
         assertEquals(expectedMessage, message);
     }
