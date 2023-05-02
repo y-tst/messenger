@@ -15,10 +15,6 @@ public class MailServer {
         this.client = client;
     }
 
-    public MailServer() {
-
-    }
-
     /**
      * Send notification.
      *

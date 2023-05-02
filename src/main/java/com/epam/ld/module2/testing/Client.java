@@ -1,8 +1,10 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.epam.ld.module2.testing;
 
-/**
- * The type Client.
- */
 public class Client {
     private String addresses;
     private String name;
@@ -13,25 +15,16 @@ public class Client {
         this.email = email;
     }
 
-    /**
-     * Gets addresses.
-     *
-     * @return the addresses
-     */
     public String getEmail() {
-        return email;
-    }
-    public String getName() {
-        return name;
+        return this.email;
     }
 
-    /**
-     * Sets addresses.
-     *
-     * @param email the addresses
-     */
+    public String getName() {
+        return this.name;
+    }
+
     public void setEmail(String email) {
-        this.addresses = addresses;
+        this.addresses = this.addresses;
     }
 
     public void setName(String name) {
