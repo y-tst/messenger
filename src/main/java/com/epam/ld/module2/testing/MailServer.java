@@ -15,10 +15,6 @@ public class MailServer {
         this.client = client;
     }
 
-    public MailServer() {
-
-    }
-
     /**
      * Send notification.
      *
@@ -27,8 +23,12 @@ public class MailServer {
      */
     public void send(String email, String messageContent) {
 
-        System.out.println("Mail sent to: " + email);
-        System.out.println("Body: " + messageContent);
+        if (!EmailVerifier.isValidEmail(email) || email == "")
+            System.out.println("Email is invalid, provide the correct one, please");
+        else {
+            System.out.println("Mail sent to: " + email);
+            System.out.println("Body: " + messageContent);
+        }
     }
 
     public Object getClient() {

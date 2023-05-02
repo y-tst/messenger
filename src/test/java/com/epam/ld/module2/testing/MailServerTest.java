@@ -4,25 +4,48 @@ import com.epam.ld.module2.testing.template.Template;
 import com.epam.ld.module2.testing.template.TemplateEngine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class MailServerTest {
 
-    private MailServer mailServer;
+   private MailServer mailServer;
+
+    @Mock
+    private TemplateEngine templateEngine;
+
+    @Mock
+    private Client client;
+
 
     @BeforeEach
-    public void setUpForAll() {
-        mailServer = new MailServer();
+    public void setUp() {
+//        TemplateEngine templateEngine = mock(TemplateEngine.class);
+//        Client client = mock(Client.class);
+        try {
+            mailServer = new MailServer(templateEngine, client);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testSend() {
 
         String email = "user@example.com";
-        String body = "Hello, this is a test email.";
+        String messageContent = "Hello, this is a test email.";
 
-        mailServer.send(email, body);
+        mailServer.send(email, messageContent);
+
+        verify(client, times(1)).getEmail();
+//        verify(templateEngine,times(1)).generateMessage(messageContent, client);
     }
 
     @Test
@@ -32,15 +55,21 @@ public class MailServerTest {
         String messageContent = "Hello, this is a test email.";
 
         mailServer.send(email, messageContent);
+
+        verify(mailServer, times(1)).send(email,messageContent);
     }
 
     @Test
     public void testSendWithNullToAddress() {
-        // Test data
+
         String email = null;
         String messageContent = "Hello, this is a test email.";
 
         mailServer.send(email, messageContent);
+
+        assertThrows(RuntimeException.class, () -> {
+            mailServer.send(email, messageContent);
+        });
     }
 
     @Test
@@ -50,6 +79,8 @@ public class MailServerTest {
         String messageContent = "";
 
         mailServer.send(email, messageContent);
+
+        verify(mailServer, times(1)).send(email,messageContent);
     }
 
     @Test
@@ -59,15 +90,10 @@ public class MailServerTest {
         String messageContent = null;
 
         mailServer.send(email, messageContent);
+
+        verify(mailServer, times(1)).send(email,messageContent);
     }
 
-
-    @BeforeEach
-    public void setUp() {
-        TemplateEngine templateEngine = mock(TemplateEngine.class);
-        Client client = mock(Client.class);
-        mailServer = new MailServer(templateEngine, client);
-    }
 
     @Test
     public void testSendEmail() {
