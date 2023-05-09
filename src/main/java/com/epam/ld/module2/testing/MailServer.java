@@ -2,13 +2,18 @@ package com.epam.ld.module2.testing;
 
 import com.epam.ld.module2.testing.template.TemplateEngine;
 
-/**
- * Mail server class.
- */
 public class MailServer {
 
     private TemplateEngine templateEngine;
     private Client client;
+
+    public TemplateEngine getTemplateEngine() {
+        return templateEngine;
+    }
+
+    public Client getClient() {
+        return client;
+    }
 
     public MailServer(TemplateEngine templateEngine, Client client) {
         this.templateEngine = templateEngine;
@@ -25,13 +30,5 @@ public class MailServer {
 
         System.out.println("Mail sent to: " + email);
         System.out.println("Body: " + messageContent);
-    }
-
-    public Object getClient() {
-        return  this.client;
-    }
-
-    public Object getTemplateEngine() {
-        return this.templateEngine;
     }
 }

@@ -12,8 +12,10 @@ public class MailServerTest {
     private MailServer mailServer;
 
     @BeforeEach
-    public void setUpForAll() {
-        mailServer = new MailServer();
+    public void setUp() {
+        TemplateEngine templateEngine = mock(TemplateEngine.class);
+        Client client = mock(Client.class);
+        mailServer = new MailServer(templateEngine, client);
     }
 
     @Test
@@ -62,12 +64,7 @@ public class MailServerTest {
     }
 
 
-    @BeforeEach
-    public void setUp() {
-        TemplateEngine templateEngine = mock(TemplateEngine.class);
-        Client client = mock(Client.class);
-        mailServer = new MailServer(templateEngine, client);
-    }
+
 
     @Test
     public void testSendEmail() {

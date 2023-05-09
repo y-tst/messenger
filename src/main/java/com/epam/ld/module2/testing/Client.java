@@ -6,7 +6,7 @@
 package com.epam.ld.module2.testing;
 
 public class Client {
-    private String addresses;
+
     private String name;
     private String email;
 
@@ -24,7 +24,7 @@ public class Client {
     }
 
     public void setEmail(String email) {
-        this.addresses = this.addresses;
+        this.email = this.email;
     }
 
     public void setName(String name) {
