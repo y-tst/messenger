@@ -6,13 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TemplateEngine {
-    /**
-     * Generate message string.
-     *
-     * @param template the template
-     * @param client   the client
-     * @return the string
-     */
+
     public String generateMessage(Template template, Client client) {
         Map<String, String> values = new HashMap<>();
         values.put("name", client.getName());

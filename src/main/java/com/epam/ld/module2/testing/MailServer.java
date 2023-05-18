@@ -20,12 +20,6 @@ public class MailServer {
         this.client = client;
     }
 
-    /**
-     * Send notification.
-     *
-     * @param email  the addresses
-     * @param messageContent the message content
-     */
     public void send(String email, String messageContent) {
 
         System.out.println("Mail sent to: " + email);

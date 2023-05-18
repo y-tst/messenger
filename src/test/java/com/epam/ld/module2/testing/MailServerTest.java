@@ -5,6 +5,7 @@ import com.epam.ld.module2.testing.template.TemplateEngine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
 import static org.mockito.Mockito.*;
 
 public class MailServerTest {
@@ -64,8 +65,6 @@ public class MailServerTest {
     }
 
 
-
-
     @Test
     public void testSendEmail() {
 
@@ -74,7 +73,7 @@ public class MailServerTest {
 
         mailServer.send(email, messageContent);
 
-        verify(mailServer.getClient(), times(1));
-//        verify(mailServer.getTemplateEngine(), times(1)).generateMessage(Mockito.any(Template.class), Mockito.any(Client.class));
+//        verify(mailServer.getClient(), times(1));
+        verify(mailServer.getTemplateEngine(), atLeastOnce());
     }
 }
