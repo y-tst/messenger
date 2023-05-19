@@ -16,4 +16,9 @@ public class Messenger {
         String messageContent = templateEngine.generateMessage(template, client);
         mailServer.send(client.getEmail(), messageContent);
     }
+
+    public String preparedMessage(Client client, Template template) {
+        String messageContent = templateEngine.generateMessage(template, client);
+        return mailServer.message(client.getEmail(), messageContent);
+    }
 }

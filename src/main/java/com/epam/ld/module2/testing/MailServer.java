@@ -25,4 +25,9 @@ public class MailServer {
         System.out.println("Mail sent to: " + email);
         System.out.println("Body: " + messageContent);
     }
+
+    public String message(String email, String messageContent) {
+        return ("Mail sent to: " + email + "\nBody: " + messageContent);
+
+    }
 }
