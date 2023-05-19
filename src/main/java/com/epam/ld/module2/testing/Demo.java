@@ -1,5 +1,7 @@
 package com.epam.ld.module2.testing;
 
+import com.epam.ld.module2.testing.custom_annotatoins.AnnotationProcessor;
+import com.epam.ld.module2.testing.custom_annotatoins.MailAnnotation;
 import com.epam.ld.module2.testing.template.Template;
 import com.epam.ld.module2.testing.template.TemplateEngine;
 
@@ -37,5 +39,8 @@ public class Demo {
         Messenger messenger = new Messenger(mailServer, new TemplateEngine());
 
         messenger.sendMessage(client, new Template(customTemplate));
+
+
+        AnnotationProcessor.processAnnotations(EmailVerifier.class);
     }
 }
