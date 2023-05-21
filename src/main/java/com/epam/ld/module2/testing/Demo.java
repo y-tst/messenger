@@ -45,11 +45,24 @@ public class Demo {
 
         /* Using File processor */
 
-        String inputFilePath = "src/main/resources/input.txt";
+        String filePath;
+        String correctFilePathInput = "src/main/resources/correctInput.txt";
+        String incorrectDataFilePathInput = "src/main/resources/incorrectInput.txt";
         String outputFilePath = "src/main/resources/output.txt";
 
+        System.out.println("For testing the input file with correct data, type '1', for the incorrect - '0' and click 'Enter' please:");
+        int choice = scan.nextInt();
+        if ( choice == 1) {
+            filePath = correctFilePathInput;
+        } else if (choice == 0) {
+            filePath = incorrectDataFilePathInput;
+        } else {
+            System.out.println("You have chosen invalid value - the program will be terminated");
+            return;
+        }
+
         try {
-            FileProcessor.processFile(inputFilePath, outputFilePath);
+            FileProcessor.processFile(filePath, outputFilePath);
             System.out.println("File processed successfully.");
         } catch (IOException e) {
             System.err.println("Error occurred while processing the file: " + e.getMessage());
